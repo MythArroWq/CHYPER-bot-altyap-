@@ -1,1 +1,0 @@
-# CHYPER-bot-altyap-
