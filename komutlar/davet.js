@@ -11,8 +11,8 @@ exports.run = (client, message) => {
   .setFooter('Yapımcı | | AdemSayılır |14/ YT#8167 ', client.user.avatarURL)
   .setThumbnail("")
   .setTimestamp()
-  .addField("» Linkler", `[WEB SİTE]()`+ "**\n**"+`[Destek Sunucusu](https://discord.gg/VZxwxpd)`, false)
-  .setURL('https://bit.ly/2wmMsVX')
+  .addField("» Linkler", `[WEB SİTE]()`+ "**\n**"+`[Destek Sunucusu]()`, false)
+  .setURL('https://www.kisa.link/LULN ')
   	.setThumbnail(client.user.avatarURL);
 
   message.channel.send({embed});
