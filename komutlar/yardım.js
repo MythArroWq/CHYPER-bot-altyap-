@@ -1,63 +1,40 @@
-const Discord = require('discord.js')
-const { stripIndents } = require('common-tags')
+const Discord = require('discord.js');
+const ayarlar = require('../ayarlar.json');
 
-exports.run = (client, message, args) => {
-    if (!args[0]) {
-        const help = {}
-        client.commands.forEach((command) => {
-            const cat = command.conf.kategori;
-            if (!help.hasOwnProperty(cat)) help[cat] = [];
-            help[cat].push(\${command.help.komut}`);
-        })
-        var str = ''
-        for (const kategori in help) {
-            str +=${kategori.charAt(0).toUpperCase() + kategori.slice(1)} ${help[kategori].join(" | ")}\n\n}
+var prefix = ayarlar.prefix;
 
-        const embed = new Discord.RichEmbed()
-            .setAuthor(${client.user.username} Komutları)
-            .setDescription(= Komut Listesi =\n[Komut hakkında bilgi için ${client.ayarlar.prefix}yardım <komut adı>]\n${str}`)
-            .setTimestamp()
-            .setColor(client.ayarlar.renk)
-        message.channel.send({embed})
-        return
-}
-    let command = args[0]
+exports.run = (client, message, params) => {
+  const embedyardim = new Discord.RichEmbed()
+  .setTitle("Komutlar")
+  .setDescription('')
+  .setColor(0x00ffff)
+  .addField("**Eğlence ve Kullanıcı Komutları:**", `f!banned = Dene ve Gör! \f!avatarım = Avatarınınızı Gösterir. \f!herkesebendençay = Herkese Çay Ismarlarsınız. \f!koş = Koşarsınız. \f!çayiç = Çay İçersiniz. \f!yaz = Bota İstediğiniz Şeyi Yazdırırsınız. \f!sunucuresmi = BOT Sunucunun Resmini Atar. \f!sunucubilgi = BOT Sunucu Hakkında Bilgi Verir. \f!kullanıcıbilgim = Sizin Hakkınızda Bilgi Verir. \f!wwegif = wwegifi atar. \f!intihar-et = İntihar Edersin`)
+  .addField("**Yetkili Komutları**", `f!ban = İstediğiniz Kişiyi Sunucudan Banlar. \f!kick  = İstediğiniz Kişiyi Sunucudan Atar. \f!unban = İstediğiniz Kişinin Yasağını Açar.  \f!oylama = Oylama Açar. \f!duyuru = Güzel Bir Duyuru Görünümü Sağlar. \f!link-engelle [aç-kapat]= Link Paylaşılmasını Engeller \f!sunucu-kur= 15 Saniye İçinde Sunucu Kurar \f!küfür-engelle [aç-kapat]= Küfür Engeller `)
+  .addField("**Ana Komutlar**", "f!yardım = BOT Komutlarını Atar. \f!bilgi = BOT Kendisi Hakkında Bilgi Verir. \f!ping = BOT Gecikme Süresini Söyler. \f!davet = BOT Davet Linkini Atar. \f!istatistik = BOT İstatistiklerini Atar.")
+  .addField("**Yapımcı**", " **Yağız Amca** ")
+  .setFooter('**--------------------------**')
+  if (!params[0]) {
+    const commandNames = Array.from(client.commands.keys());
+    const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
+    message.channel.send(embedyardim);
+  } else {
+    let command = params[0];
     if (client.commands.has(command)) {
-        command = client.commands.get(command)
-        var yetki = command.conf.permLevel.toString()
-            .replace("0", Yetki gerekmiyor.)
-            .replace("1", Mesajları Yönet yetkisi gerekiyor.)
-            .replace("2", Üyeleri At yetkisi gerekiyor.)
-            .replace("3", Yönetici yetkisi gerekiyor.)
-            .replace("4", Bot sahibi yetkisi gerekiyor.)
-        const embed = new Discord.RichEmbed()
-            .addField('Komut', command.help.komut, false)
-            .addField('Açıklama', command.help.aciklama, false)
-            .addField('Kullanabilmek için Gerekli Yetki', yetki)
-            .addField('Doğru Kullanım', client.ayarlar.prefix + command.help.kullanim)
-            .addField('Alternatifler', command.conf.aliases[0] ? command.conf.aliases.join(', ') : 'Bulunmuyor')
-            .setTimestamp()
-            .setColor(client.ayarlar.renk)
-        message.channel.send({embed})
-    } else {
-        const embed = new Discord.RichEmbed()
-            .setDescription(${args[0]} diye bir komut bulunamadı. Lütfen geçerli bir komut girin. Eğer komutları bilmiyorsanız ${client.ayarlar.prefix}yardım yazabilirsiniz.)
-            .setTimestamp()
-            .setColor(client.ayarlar.renk)
-        message.channel.send({embed})
+      command = client.commands.get(command);
+      message.author.send('asciidoc', `= ${command.help.name} = \n${command.help.description}\nDoğru kullanım: ` + prefix + `${command.help.usage}`);
     }
-}
+  }
+};
 
 exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: ['h', 'halp', 'help', 'y', 'komutlar'],
-    permLevel: 0,
-    kategori: 'bot'
-}
+  enabled: true,
+  guildOnly: false,
+  aliases: ['h', 'halp', 'help', 'y'],
+  permLevel: 0
+};
 
 exports.help = {
-    komut: 'yardım',
-    aciklama: 'Tüm komutları gösterir.',
-    kullanim: 'yardım [komut]'
-}
+  name: 'yardım',
+  description: 'Tüm komutları gösterir.',
+  usage: 'yardım [komut]'
+};
