@@ -1,40 +1,43 @@
-const Discord = require('discord.js');
-const ayarlar = require('../ayarlar.json');
+const Discord = require('discord.js')
 
-var prefix = ayarlar.prefix;
-
-exports.run = (client, message, params) => {
-  const embedyardim = new Discord.RichEmbed()
-  .setTitle("Komutlar")
-  .setDescription('')
-  .setColor(0x00ffff)
-  .addField("**Eğlence ve Kullanıcı Komutları:**", `f!banned = Dene ve Gör! \f!avatarım = Avatarınınızı Gösterir. \f!herkesebendençay = Herkese Çay Ismarlarsınız. \f!koş = Koşarsınız. \f!çayiç = Çay İçersiniz. \f!yaz = Bota İstediğiniz Şeyi Yazdırırsınız. \f!sunucuresmi = BOT Sunucunun Resmini Atar. \f!sunucubilgi = BOT Sunucu Hakkında Bilgi Verir. \f!kullanıcıbilgim = Sizin Hakkınızda Bilgi Verir. \f!wwegif = wwegifi atar. \f!intihar-et = İntihar Edersin`)
-  .addField("**Yetkili Komutları**", `f!ban = İstediğiniz Kişiyi Sunucudan Banlar. \f!kick  = İstediğiniz Kişiyi Sunucudan Atar. \f!unban = İstediğiniz Kişinin Yasağını Açar.  \f!oylama = Oylama Açar. \f!duyuru = Güzel Bir Duyuru Görünümü Sağlar. \f!link-engelle [aç-kapat]= Link Paylaşılmasını Engeller \f!sunucu-kur= 15 Saniye İçinde Sunucu Kurar \f!küfür-engelle [aç-kapat]= Küfür Engeller `)
-  .addField("**Ana Komutlar**", "f!yardım = BOT Komutlarını Atar. \f!bilgi = BOT Kendisi Hakkında Bilgi Verir. \f!ping = BOT Gecikme Süresini Söyler. \f!davet = BOT Davet Linkini Atar. \f!istatistik = BOT İstatistiklerini Atar.")
-  .addField("**Yapımcı**", " **Yağız Amca** ")
-  .setFooter('**--------------------------**')
-  if (!params[0]) {
-    const commandNames = Array.from(client.commands.keys());
-    const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
-    message.channel.send(embedyardim);
-  } else {
-    let command = params[0];
-    if (client.commands.has(command)) {
-      command = client.commands.get(command);
-      message.author.send('asciidoc', `= ${command.help.name} = \n${command.help.description}\nDoğru kullanım: ` + prefix + `${command.help.usage}`);
-    }
+exports.run = async (client, message, args) => {
+  
+  let p = '/'
+  let arg = args.slice(0).join(' ');
+  
+  if (!arg[0]) {
+  const embed = new Discord.RichEmbed()
+  .setTitle('Yardım Menüsü')
+  .setDescription(`:white_small_square: \`c!yardım eğlence\` = Eğlence ve Kullanıcı Komutlarını Listeler. \n\n:white_small_square: \`c!yardım moderasyon\` = Moderasyon Komutlarını Listeler. `)
+  message.channel.send({embed})
+  }//////komutları kendiniz ayarlayınız 
+   if (arg === 'eğlence' || arg === '1') {
+  const embed = new Discord.RichEmbed()
+  .setTitle('Eğlence ve Kullanıcı Komutları')
+  .setDescription(`:white_small_square: \`c!slots\` = Slots Oyunu Oynatır. \n:white_small_square: \`c!avatarım\` = Avatarınızı Gösterir. \n:white_small_square: \`c!ara155\` = Polisi Arar. \n:white_small_square: \`c!ascii\` = Ascii olarak yazarsınız. \n:white_small_square: \`c!herkesebendençay\` = Herkese Çay Ismarlarsınız. \n:white_small_square: \`c!çayiç\` = Çay İçersiniz. \n:white_small_square: \`c!çayaşekerat\` = Çaya Şeker Atarsınız. \n:white_small_square: \`c!yumruk-at\` = Yumruk Atarsınız. \n:white_small_square: \`c!wwegif\` = WWE Gifi Atar. \n:white_small_square: \`c!yaz\` = Bota İstediðiniz Şeyi Yazdırırsınız. \n:white_small_square: \`c!sunucuresmi\` = Sunucu Resmini Atar. \n:white_small_square: \`c!stresçarkı\` = Stres Çarkı Çevirirsin. \n:white_small_square: \`c!çekiç\` = İstediginiz Kişiye Çekiç Atarsınız. \n:white_small_square: \`c!koş\` = Koşarsınız. \n:white_small_square: \`c!yazı-tura\` = Yazı Tura Oynarsınız. \n:white_small_square: \`c!nsfw-gif\` = Nsfw Gifi Atar. \n:white_small_square: \`c!simit\` = Simit Yersiniz. \n:white_small_square: \`c!yetkilerim\` = Yetkilerinizi Gösterir. \n:white_small_square: \`c!kullanıcıbilgim\` = Bilgilerinizi Gösterir. \n:white_small_square: \`c!ping\` = Botun Pingini Gösterir. \n:white_small_square: \`c!fbi\` = FBI Gifi Atar. \n:white_small_square: \`c!wasted\` = Profilinize Wasted Efekti Ekler. \n:white_small_square: \`c!sunucubilgi\` = Sunucu Hakkında Bilgi Verir. `)
+  message.channel.send(embed)
   }
-};
-
+  if (arg === 'moderasyon' || arg === '2') {
+      const embed = new Discord.RichEmbed()
+      .setTitle('Moderasyon Komutları:')
+      .setDescription(` :white_small_square: \`c!otorol\` = Sunucu için otorol ayarlar. \n:white_small_square: \`c!sayaç-ayarla\` = Sunucu için sayaç ayarlar. \n:white_small_square: \`c!ban\` = İstediginiz Kişiyi Banlar. \n:white_small_square: \`c!unban\` = İstediğiniz Kişini Banını  Açar. \n:white_small_square: \`c!küfür-engelle [aç-kapat]\` = Küfürü Engeller. \n:white_small_square: \`c!link-engelle [aç-kapat]\` = Link Paylaşılmasını Engeller.  \n:white_small_square: \`c!oylama\` = Oylama Yapar. \n:white_small_square: \`c!slowmode\` = Yavaş Modu Açar. `)
+      return message.channel.send(embed);
+}
+   if (arg === 'müzik' || arg === '3') {
+      const embed = new Discord.RichEmbed()
+      .setTitle('Müzik komutları:')
+      .setDescription(`:white_small_square: \`f!otorol\` = Sunucu için otorol ayarlar. \n:white_small_square: \`f!sayaç-ayarla\` = Sunucu için sayaç ayarlar. \n:white_small_square: \`f!ban\` = Ýstediginiz Kiþiyi Banlar. \n:white_small_square: \`f!unban\` = Ýstediginiz Kiþini Banýný Açar. \n:white_small_square: \`f!küfür-engelle [aç-kapat]\` = Küfürü Engeller. \n:white_small_square: \`f!link-engelle [aç-kapat]\` = Link Paylaþýlmasýný Engeller.  `)    
+}
+}
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ['h', 'halp', 'help', 'y'],
-  permLevel: 0
+  aliases: ['yardým','help','y'],
+  permlevel: 0
 };
 
 exports.help = {
   name: 'yardım',
-  description: 'Tüm komutları gösterir.',
-  usage: 'yardım [komut]'
+  description: 'Geliþmiþ Yardým Menüsü',
+  usage: 'yardım'
 };
