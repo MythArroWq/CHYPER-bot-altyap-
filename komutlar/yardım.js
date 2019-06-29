@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
   if (!arg[0]) {
   const embed = new Discord.RichEmbed()
   .setTitle('Yardım Menüsü')
-  .setDescription(`:white_small_square: \`c!yardım eğlence\` = Eğlence ve Kullanıcı Komutlarını Listeler. \n\n:white_small_square: \`c!yardım moderasyon\` = Moderasyon Komutlarını Listeler. `)
+  .setDescription(`:white_small_square: \`r!yardım eğlence\` = Eğlence ve Kullanıcı Komutlarını Listeler. \n\n:white_small_square: \`r!yardım moderasyon\` = Moderasyon Komutlarını Listeler. `)
   message.channel.send({embed})
   }//////komutları kendiniz ayarlayınız 
    if (arg === 'eğlence' || arg === '1') {
