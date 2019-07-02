@@ -7,12 +7,12 @@ exports.run = (client, message) => {
   .setTitle("Beni sunucuna davet etmek için tıkla.")
     .setAuthor(message.author.username, message.author.avatarURL)
   .setColor("RANDOM")
-  .setDescription("**Bot yapımıcısı:** <@434323148234686464>")
-  .setFooter('Yapımcı | | AdemSayılır |14/ YT#8167 ', client.user.avatarURL)
+  .setDescription("**Bot yapımıcısı:** <yapımcı etiket>")
+  .setFooter('Yapımcı YAPIMCI ADI ', client.user.avatarURL)
   .setThumbnail("")
   .setTimestamp()
-  .addField("» Linkler", `[WEB SİTE]()`+ "**\n**"+`[Destek Sunucusu]()`, false)
-  .setURL('https://www.kisa.link/LULN ')
+  .addField("» Linkler", `[WEB SİTE Yakında!]()`+ "**\n**"+`[Destek Sunucusu](https://discord.gg/jeHrk3G)`, false)
+  .setURL('(https://discordapp.com/oauth2/authorize?client_id=595636948694204416&scope=bot&permissions=0()')
   	.setThumbnail(client.user.avatarURL);
 
   message.channel.send({embed});
