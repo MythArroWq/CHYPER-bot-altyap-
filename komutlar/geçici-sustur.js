@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
  
     let modlog = guild.channels.find('name', 'mod-log');
   if (!modlog) return message.reply('`mod-log` kanalını bulamıyorum.');
-    if (reason.length < 1) return message.reply('Yanlış kullanım !mute <kullanıcı> <süre> <sebep>');
+    if (reason.length < 1) return message.reply('Yanlış kullanım c!sustur <kullanıcı> <süre> <sebep>');
  if(!tomute) return message.reply("Doğru Kullanım: !mute <oyuncu> <süre> <sebep>");
   if(tomute.hasPermission("ADMINISTRATOR")) return message.reply("Hata: Geçici olarak susturmaya çalıştığınız kişi yetkili veya bot'un yetkisi belirttiğiniz kişiyi geçici olarak susturmaya yetmiyor!");
 let muterole = message.guild.roles.find(r => r.name === "Susturulmuş");

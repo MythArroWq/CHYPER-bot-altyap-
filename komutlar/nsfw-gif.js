@@ -10,7 +10,7 @@ exports.run = (client, msg, args) => {
       msg.channel.send({ file: response.body.message });
     });
   } else {
-    msg.channel.send("Bu kanal bir NSFW kanalı değil! Nasıl Yapılır Metin kanalının ustune gelip kanalı düzenle yerine girin ordan asagı inin uygunsuzkanalı açın")
+    msg.channel.send("Bu kanal bir NSFW kanalı değil!")
   }
 };
 

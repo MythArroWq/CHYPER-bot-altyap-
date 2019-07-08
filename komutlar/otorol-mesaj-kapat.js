@@ -5,9 +5,9 @@ exports.run = async (client, message, args) => {
   	let sunucuyaözelayarlarOtorol = JSON.parse(fs.readFileSync("./otorol.json", "utf8"));
 		if(!sunucuyaözelayarlarOtorol[message.guild.id]) {
 			const embed = new Discord.RichEmbed()
-				.setDescription(`Otorolü Ayarlamadığın İçin Kapatamazsın!`)
+				.setDescription(`Otorolü Ayarlamadığın İçin Otorol Mesajını Kapatamazsın!`)
 				.setColor("RED")
-				.setTimestamp('Ayarlamak İçin c!otorol @roladi')
+				.setTimestamp('Ayarlamak İçin !otorol @Rol #Kanal')
 			message.channel.send({embed})
 			return
 		}
@@ -18,7 +18,7 @@ exports.run = async (client, message, args) => {
 
 		})
 		const embed = new Discord.RichEmbed()
-			.setDescription(`Otorol Mesajları Başarıyla Kapatıldı`)
+			.setDescription(`Otorol Mesajları Başarıyla Kapatıldı.`)
 			.setColor("RANDOM")
 			.setTimestamp()
 		message.channel.send({embed})
@@ -29,14 +29,14 @@ exports.run = async (client, message, args) => {
 
 
 exports.conf = {
-  enabled: true, 
-  guildOnly: false, 
+  enabled: true,
+  guildOnly: false,
   aliases: ["kapatotoyazı"],
   permLevel: 0
 };
 
 exports.help = {
-  name: 'otorolmesajkapat', 
+  name: 'kapatotoyazı',
   description: 'Slots oyunu oynar',
   usage: 'otorolmesajkapat'
 };

@@ -19,7 +19,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: 'avatar', 
+  name: 'avatarım', 
   description: 'Avatarınızı gösterir',
-  usage: 'avatar'
+  usage: 'avatarım'
 };

@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
 			const embed = new Discord.RichEmbed()
 				.setDescription(`Otorolü Ayarlamadığın İçin Sıfırlayamazsın!`)
 				.setColor("RED")
-				.setTimestamp('Ayarlamak İçin c!otorol @roladi')
+				.setTimestamp('Ayarlamak İçin !otorol @Rol #Kanal')
 			message.channel.send({embed})
 			return
 		}
@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
 			console.log(err)
 		})
 		const embed = new Discord.RichEmbed()
-			.setDescription(`Otorol Başarıyla Sıfırlandı`)
+			.setDescription(`Otorol Başarıyla Kapandı !`)
 			.setColor("RANDOM")
 			.setTimestamp()
 		message.channel.send({embed})
@@ -26,14 +26,14 @@ exports.run = async (client, message, args) => {
 
 
 exports.conf = {
-  enabled: true, 
-  guildOnly: false, 
-  aliases: [],
+  enabled: true,
+  guildOnly: false,
+  aliases: ['otorolsıfırla', 'kapat otorol'],
   permLevel: 0
 };
 
 exports.help = {
-  name: 'otorolsıfırla', 
-  description: 'Slots oyunu oynar',
+  name: 'kapatotorol',
+  description: 'Otorol Kapatır',
   usage: 'otorolkapat'
 };

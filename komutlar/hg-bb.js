@@ -1,34 +1,37 @@
 const Discord = require('discord.js')
-const db = require('quick.db');
-const ayarlar = require('../ayarlar.json')
+const fs = require('fs');
+const ayarlar = require('../ayarlar.json');
+let kanal = JSON.parse(fs.readFileSync("././ayarlar/glog.json", "utf8"));
 
 exports.run = async (client, message, args) => {
+if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply(`Bu Komutu Kullanabilmek İçin **Yönetici** İznine Sahip Olmalısın!`);
   
-  let prefix = await require('quick.db').fetch(`prefix_${message.guild.id}`) || ayarlar.prefix
- 
-  if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send(`Bu komutu kullanabilmek için "\`Yönetici\`" yetkisine sahip olmalısın.`);
-  
-  const mesaj2 = await db.fetch(`cikism_${message.guild.id}`);
-  
-  let mesaj = args.slice(0).join(' ')
-  
-      if (!mesaj) {
-        return message.channel.send(`Çıkış mesajını yazmalısın. \`${prefix}çıkışmesaj -kullanıcı- adlı kullanıcı -sunucu- adlı sunucudan ayrıldı.\``)
+  let channel = message.mentions.channels.first()
+    if (!channel) {
+        message.channel.send(':x: | Kullanım: `l!giriş-çıkış-ayarla #kanal`')
+        return
     }
-  
-    db.set(`cikism_${message.guild.id}`, mesaj)
-    message.channel.send(`Çıkış mesajı \`${mesaj}\` olarak ayarlandı. Kapatmak için \`${prefix}kapat çıkışmesaj\` yazmalısın.`)
+    if(!kanal[message.guild.id]){
+        kanal[message.guild.id] = {
+            resim: channel.id
+        };
+    }
+    fs.writeFile("././ayarlar/glog.json", JSON.stringify(kanal), (err) => {
+        console.log(err)
+    })
+    message.channel.send(`:white_check_mark: | ** Resimli Hoşgeldin - Güle Güle kanalı ${channel} Olarak Ayarlandı.** `)
 }
     
 exports.conf = {
     enabled: true,
-    guildOnly: true,
-    aliases: ['çıkışm','çıkış-mesaj'],
-    permLevel: 3
+    guildOnly: false,
+    aliases: [],
+    permLevel: 2
 }
 
 exports.help = {
-    name: 'çıkışmesaj',
-    description: 'Çıkış mesajını ayarlar. (Kullanıcı isminin geleceği yere "-kullanıcı-", sunucu isminin geleceği yere "-sunucu-" yazınız.)',
-    usage: 'çıkışmesaj <yazı>'
+    name: 'giriş-çıkış-ayarla',
+    description: 'Giriş Çıkış Kanalını Ayarlar.',
+    usage: 'gç-ayarla <#kanal>'
 }
+   
